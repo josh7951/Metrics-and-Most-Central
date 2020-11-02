@@ -108,14 +108,14 @@ public class Project2 {
     }
 
     public static double[] recursiveStart(int[] box, int[] X, int[] Y) {
-        int xAvg = 884;
-        int yAvg = 949;
-        /* for(int x = 0; x < X.length; x++){
+        int xAvg = 0;
+        int yAvg = 0;
+        for(int x = 0; x < X.length; x++){
             xAvg+=X[x]/X.length;
         }
         for(int y = 0; y < Y.length; y++){
             yAvg+=Y[y]/Y.length;
-        } */
+        }
         double currMin = calcL2(xAvg, yAvg, X, Y);
         sol[0] = xAvg;
         sol[1] = yAvg;
@@ -129,8 +129,8 @@ public class Project2 {
     //It moves towards the most minimum L2 metric.
     public static void recursiveSearch(int[] box, int x, int y, double currMin, int[] X, int[] Y) {
         // Possible combinations of movement for search
-        int[] possibleX = { 0, 1, 1, 1, 0, -1, -1, -1 };
-        int[] possibleY = { 1, 1, 0, -1, -1, -1, 0, 1 };
+        int[] possibleX = { 0, 1, 1, 1, 0, -1, -1, -1, -5, -5, 5, 5};
+        int[] possibleY = { 1, 1, 0, -1, -1, -1, 0, 1, -5, 5, -5, 5};
 
         double temp;
         int tempX, tempY;
@@ -140,7 +140,7 @@ public class Project2 {
         int nextY = y;
 
         // Traverse the inner graph
-        for (int k = 0; k < 8; k++) {
+        for (int k = 0; k < 12; k++) {
             tempX = x + possibleX[k];
             tempY = y + possibleY[k];
             if (isSafe(box, tempX, tempY)) {
@@ -162,7 +162,7 @@ public class Project2 {
         }
     }
     public static void main(String[] args) {
-        int[] originalArr = readFile("input2-2.txt");
+        int[] originalArr = readFile("input2.txt");
         int length = originalArr.length/2;
         int[] X = new int[length];
         int[] Y = new int[length];
@@ -170,8 +170,9 @@ public class Project2 {
             X[i] = originalArr[x];
             Y[i] = originalArr[y];
         }
-        double[] output = recursiveStart(calcBox(X, Y), X, Y);
+        double[] l2 = recursiveStart(calcBox(X, Y), X, Y);
+
         System.out.println("Using L1: ("+ findMedian(X) + ", " + findMedian(Y) + ") " + calcL1(X, Y));
-        System.out.println("Using L2: (" + (int)output[0] + ", " + (int)output[1] + ") " + output[2]);
+        System.out.println("Using L2: (" + (int)l2[0] + ", " + (int)l2[1] + ") " + l2[2]);
     }
 }
