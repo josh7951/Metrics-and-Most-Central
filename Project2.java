@@ -35,7 +35,7 @@ public class Project2 {
         Arrays.sort(arr);
         int median = 0;
         if(arr.length % 2 == 0){
-            median = ((int)arr[arr.length/2] + (int)arr[arr.length/2 - 1]);
+            median = ((int)arr[arr.length/2] + (int)arr[arr.length/2 - 1])/2;
         }
         else{
             median = (int)arr[arr.length/2];
@@ -108,20 +108,20 @@ public class Project2 {
     }
 
     public static double[] recursiveStart(int[] box, int[] X, int[] Y) {
-        int xAvg = 0;
-        int yAvg = 0;
-        for(int x = 0; x < X.length; x++){
+        int xAvg = 884;
+        int yAvg = 949;
+        /* for(int x = 0; x < X.length; x++){
             xAvg+=X[x]/X.length;
         }
         for(int y = 0; y < Y.length; y++){
             yAvg+=Y[y]/Y.length;
-        }
+        } */
         double currMin = calcL2(xAvg, yAvg, X, Y);
         sol[0] = xAvg;
         sol[1] = yAvg;
         sol[2] = currMin;
         
-        recursiveSearch(box, 1, 1, currMin, X, Y);
+        recursiveSearch(box, xAvg, yAvg, currMin, X, Y);
         return sol;
     }
     
@@ -162,7 +162,7 @@ public class Project2 {
         }
     }
     public static void main(String[] args) {
-        int[] originalArr = readFile("input2.txt");
+        int[] originalArr = readFile("input2-2.txt");
         int length = originalArr.length/2;
         int[] X = new int[length];
         int[] Y = new int[length];
